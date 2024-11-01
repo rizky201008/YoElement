@@ -13,51 +13,57 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
 fun YButton(
-    width: Dp = 100.dp, // Width of the button
-    backgroundColor: Color = MaterialTheme.colorScheme.primary, // Background color of the button
-    textColor: Color = MaterialTheme.colorScheme.onPrimary, // Text color of the button
+    modifier: Modifier = Modifier,
+    containerColor: Color = MaterialTheme.colorScheme.primary, // Background color of the button,
+    contentColor: Color = MaterialTheme.colorScheme.onPrimary,
+    textStyle: TextStyle = TextStyle(), // Text color of the button
     text: String = "Button", // Text of the button
     shape: Shape = MaterialTheme.shapes.medium, // Shape of the button
     onClick: () -> Unit = {} // Click listener of the button
 ) {
-    val padding = if (width > 100.dp) 10.dp else width / 10
     Box(
-        modifier = Modifier
-            .width(width)
+        modifier = modifier
             .clip(shape)
             .clickable { onClick() }
-            .background(color = backgroundColor, shape = shape)
-            .padding(padding),
+            .background(color = containerColor, shape = shape)
+            .padding(10.dp),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = text, color = textColor, fontWeight = FontWeight.Bold)
+        Text(
+            text = text,
+            style = textStyle.copy(color = contentColor, fontWeight = FontWeight.Bold)
+        )
     }
 }
 
 @Composable
 fun YButtonGhost(
-    width: Dp = 100.dp, // Width of the button
-    textColor: Color = MaterialTheme.colorScheme.primary, // Text color of the button
+    modifier: Modifier = Modifier,
+    containerColor: Color = MaterialTheme.colorScheme.primary, // Background color of the button,
+    contentColor: Color = MaterialTheme.colorScheme.onPrimary,
+    textStyle: TextStyle = TextStyle(), // Text color of the button
     text: String = "Button", // Text of the button
     shape: Shape = MaterialTheme.shapes.medium, // Shape of the button
     onClick: () -> Unit = {} // Click listener of the button
 ) {
-    val padding = if (width > 100.dp) 10.dp else width / 10
     Box(
-        modifier = Modifier
-            .width(width)
+        modifier = modifier
             .clip(shape)
             .clickable { onClick() }
-            .background(color = Color.Transparent, shape = shape)
-            .padding(padding),
+            .background(color = containerColor, shape = shape)
+            .padding(10.dp),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = text, color = textColor, fontWeight = FontWeight.Bold)
+        Text(
+            text = text,
+            style = textStyle.copy(color = contentColor, fontWeight = FontWeight.Bold)
+        )
     }
 }
